@@ -82,7 +82,7 @@ public class MainFrame extends JFrame implements SpeechRecognitionService.Recogn
 
         // Left side - Main buttons
         JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        
+
         startButton = createButton("🎤 Start Recording", this::startRecording);
         leftPanel.add(startButton);
 
@@ -101,7 +101,7 @@ public class MainFrame extends JFrame implements SpeechRecognitionService.Recogn
 
         // Right side - Recording time and progress
         JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
-        
+
         recordingTimeLabel = new JLabel("Time: 00:00");
         recordingTimeLabel.setFont(new Font("Monospaced", Font.BOLD, 12));
         rightPanel.add(recordingTimeLabel);
@@ -192,7 +192,7 @@ public class MainFrame extends JFrame implements SpeechRecognitionService.Recogn
             copyButton.setEnabled(false);
             deleteButton.setEnabled(false);
             transcriptArea.setText("Listening...\n");
-            
+
             recordingStartTime = System.currentTimeMillis();
             recordingProgress.setVisible(true);
 
@@ -217,13 +217,13 @@ public class MainFrame extends JFrame implements SpeechRecognitionService.Recogn
         if (recordingTimer != null) {
             recordingTimer.stop();
         }
-        
+
         statusLabel.setText("Processing audio... Please wait");
         startButton.setEnabled(false);
         stopButton.setEnabled(false);
         recordingProgress.setVisible(false);
         recordingTimeLabel.setText("Time: 00:00");
-        
+
         speechService.stopRecording();
     }
 
@@ -237,7 +237,8 @@ public class MainFrame extends JFrame implements SpeechRecognitionService.Recogn
         if (speechService.saveTranscription(transcript)) {
             updateHistoryList();
             statusLabel.setText("Transcript saved successfully");
-            JOptionPane.showMessageDialog(this, "Transcript saved to file!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Transcript saved to file!", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
         } else {
             statusLabel.setText("Error saving transcript");
             JOptionPane.showMessageDialog(this, "Error saving transcript", "Error", JOptionPane.ERROR_MESSAGE);
@@ -264,12 +265,14 @@ public class MainFrame extends JFrame implements SpeechRecognitionService.Recogn
     private void deleteTranscription(ActionEvent e) {
         int selectedIndex = historyList.getSelectedIndex();
         if (selectedIndex == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a transcription to delete", "Info", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select a transcription to delete", "Info",
+                    JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
         String selected = historyModel.getElementAt(selectedIndex);
-        int result = JOptionPane.showConfirmDialog(this, "Delete: " + selected + "?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        int result = JOptionPane.showConfirmDialog(this, "Delete: " + selected + "?", "Confirm Delete",
+                JOptionPane.YES_NO_OPTION);
 
         if (result == JOptionPane.YES_OPTION && speechService.deleteTranscription(selected)) {
             updateHistoryList();
@@ -337,4 +340,3 @@ public class MainFrame extends JFrame implements SpeechRecognitionService.Recogn
         });
     }
 }
-

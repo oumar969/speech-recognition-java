@@ -31,6 +31,7 @@ public class SpeechRecognitionService {
 
     public interface RecognitionListener {
         void onRecognitionResult(String result);
+
         void onRecognitionError(String error);
     }
 
@@ -132,7 +133,7 @@ public class SpeechRecognitionService {
     private void processRecognition() {
         try {
             // Simulate processing time (1-3 seconds)
-            Thread.sleep(1000 + (int)(Math.random() * 2000));
+            Thread.sleep(1000 + (int) (Math.random() * 2000));
 
             // Generate mock recognized text
             String result = generateMockRecognition();
@@ -152,29 +153,29 @@ public class SpeechRecognitionService {
     private String generateMockRecognition() {
         // Mock recognized texts of varying length
         String[] mockTexts = {
-            "Hello, this is a test recording",
-            "The weather today is beautiful",
-            "I am testing the speech recognition application",
-            "This is a demonstration of the speech recognition system",
-            "Every good boy does fine",
-            "The quick brown fox jumps over the lazy dog",
-            "Good morning, how can I help you today",
-            "Speech recognition is working correctly",
-            "Thank you for using this application",
-            "This demonstrates real-time audio processing",
-            "The quick brown fox",
-            "Hello world",
-            "How are you doing today",
-            "This is a simple test",
-            "Another voice sample"
+                "Hello, this is a test recording",
+                "The weather today is beautiful",
+                "I am testing the speech recognition application",
+                "This is a demonstration of the speech recognition system",
+                "Every good boy does fine",
+                "The quick brown fox jumps over the lazy dog",
+                "Good morning, how can I help you today",
+                "Speech recognition is working correctly",
+                "Thank you for using this application",
+                "This demonstrates real-time audio processing",
+                "The quick brown fox",
+                "Hello world",
+                "How are you doing today",
+                "This is a simple test",
+                "Another voice sample"
         };
 
         // Select random text for variety
-        int randomIndex = (int)(Math.random() * mockTexts.length);
+        int randomIndex = (int) (Math.random() * mockTexts.length);
         String baseText = mockTexts[randomIndex];
-        
+
         // Add confidence-like value
-        int confidence = 80 + (int)(Math.random() * 20); // 80-100%
+        int confidence = 80 + (int) (Math.random() * 20); // 80-100%
         return baseText + " [Confidence: " + confidence + "%]";
     }
 
@@ -257,5 +258,3 @@ public class SpeechRecognitionService {
         return isRecording;
     }
 }
-
-
